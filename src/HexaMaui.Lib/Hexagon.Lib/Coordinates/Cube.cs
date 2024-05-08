@@ -66,8 +66,8 @@ namespace Hexagon.Lib.Coordinates
         {
             if (other is null) return 1;
 
-            int thisDistance = Math.Max(Math.Abs(Q), Math.Max(Math.Abs(R), Math.Abs(S)));
-            int otherDistance = Math.Max(Math.Abs(other.Q), Math.Max(Math.Abs(other.R), Math.Abs(other.S)));
+            int thisDistance = this.Length;
+            int otherDistance = other.Length;
 
             int distanceComparison = thisDistance.CompareTo(otherDistance);
 

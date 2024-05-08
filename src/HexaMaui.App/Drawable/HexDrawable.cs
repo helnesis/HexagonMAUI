@@ -13,7 +13,7 @@ namespace HexaMaui.App.Drawable
     {
         public void Draw(ICanvas canvas, RectF dirtyRect)
         {
-            _ = new LayoutManager(layerCount: 10, size: new(25), origin: new(dirtyRect.Center.X, dirtyRect.Center.Y), orientation: false, canvas: canvas, color: true);
+            _ = new LayoutManager(layerCount: 10, size: new(30), origin: new(dirtyRect.Center.X, dirtyRect.Center.Y), orientation: true, canvas: canvas, color: true);
         }
     }
 }
