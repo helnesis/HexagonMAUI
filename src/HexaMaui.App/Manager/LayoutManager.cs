@@ -15,8 +15,6 @@ namespace HexaMaui.App.Manager
 
         private readonly Point _Origin;
 
-        private PathF _Path;
-
         private readonly bool _HasColor;
 
         private readonly ICanvas _Canvas;
@@ -55,7 +53,8 @@ namespace HexaMaui.App.Manager
         /// <param name="size">Size (radius)</param>
         /// <param name="origin">Origin</param>
         /// <param name="orientation">Hexagon layout, set to true for pointy, false for flat.</param>
-        /// <param name="startColor">Hexagon start color.</param>
+        /// <param name="color">Color</param>
+        /// <param name="canvas">Canvas</param>
         /// <exception cref="ArgumentException"></exception>
         public LayoutManager(int layerCount, Point size, Point origin, bool orientation, ICanvas canvas, bool color = false)
         {
@@ -68,7 +67,6 @@ namespace HexaMaui.App.Manager
             _HasColor = color;
             _Canvas = canvas;
 
-            _Path = new PathF();
             _Layout = new Layout(orientation ? Orientation.Pointy : Orientation.Flat, size, origin);
 
             Generate();
@@ -97,8 +95,10 @@ namespace HexaMaui.App.Manager
                     shape.RGB = new(rgb.R, rgb.G, rgb.B);
                     _Canvas.FillColor = Color.FromRgb(shape.RGB.R, shape.RGB.G, shape.RGB.B);
                 }
+     
 
                 shape.Identifier = hexIndex++;
+
                 Create(shape);
             }
 
@@ -106,28 +106,39 @@ namespace HexaMaui.App.Manager
 
         private void Create(CubeInteger coordinate)
         {
-            _Path = new PathF();
+            using var pathf = new PathF();
 
             var points =
                 _Layout.PolygonCorners(coordinate).ToList();
+
+            var center = _Layout.HexToPixel(coordinate);
+
+            // Hexagon position
+            float centerX = (float)center.X;
+            float centerY = (float)center.Y;
 
             // Move to the first point.
             float oX = (float)points[0].X;
             float oY = (float)points[0].Y;
 
-            _Path.MoveTo(oX, oY);
+            pathf.MoveTo(oX, oY);
 
             for (int i = 1; i < points.Count; i++)
             {
-                _Path.LineTo((float)points[i].X, (float)points[i].Y);
+                pathf.LineTo((float)points[i].X, (float)points[i].Y);
             }
 
+            var cubeCenter = _Layout.HexToPixel(coordinate);
 
-            _Path.Close();
 
-            _Canvas.DrawPath(_Path);
-            _Canvas.FillPath(_Path);
+            pathf.Close();
 
+            
+            _Canvas.FillPath(pathf);
+            _Canvas.DrawPath(pathf);
+
+            _Canvas.FontColor = Colors.Black;
+            _Canvas.DrawString(coordinate.Identifier.ToString(), centerX, centerY, HorizontalAlignment.Center);
         }
 
     }

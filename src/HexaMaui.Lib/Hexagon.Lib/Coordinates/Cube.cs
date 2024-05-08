@@ -52,7 +52,6 @@ namespace Hexagon.Lib.Coordinates
     public sealed class CubeInteger(int q, int r, int s) : Cube<int>(q, r, s), IComparable<CubeInteger>
     {
         public int Identifier { get; set; }
-
         public (byte R, byte G, byte B) RGB { get; set; }
 
         public static readonly IEnumerable<CubeInteger> Directions 
