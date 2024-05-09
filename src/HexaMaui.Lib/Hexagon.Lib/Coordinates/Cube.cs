@@ -60,8 +60,8 @@ namespace Hexagon.Lib.Coordinates
             int N = a.Distance(b);
             double step = 1.0 / Math.Max(N, 1);
 
-            FloatedCube nudgeA = new FloatedCube(a.Q + 1e-06, a.R + 1e-06, a.S - 2e-06);
-            FloatedCube nudgeB = new FloatedCube(b.Q + 1e-06, b.R + 1e-06, b.S - 2e-06);
+            FloatedCube nudgeA = new(a.Q + 1e-06, a.R + 1e-06, a.S - 2e-06);
+            FloatedCube nudgeB = new(b.Q + 1e-06, b.R + 1e-06, b.S - 2e-06);
 
             for (int i = 0; i <= N; i++)
                 yield return nudgeA.Lerp(nudgeB, step * i).Round();
@@ -118,6 +118,9 @@ namespace Hexagon.Lib.Coordinates
         }
         public bool Equals(Cube<TNumber>? other)
         {
+            if (other is null)
+                return false;
+
             return Q.Equals(other.Q) && R.Equals(other.R) && S.Equals(other.S);
         }
         public override bool Equals(object? obj)
