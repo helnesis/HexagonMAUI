@@ -5,10 +5,10 @@ namespace HexaMaui.App.Drawable
 {
     public class IndividualHexDrawable : IDrawable
     {
-  
         // Size
         public Hexagon.Lib.Point? HexSize { get; set; }
 
+        // Identifier
         public int Identifier { get; set; }
 
         // Color
@@ -26,6 +26,9 @@ namespace HexaMaui.App.Drawable
                 canvas.FillColor = HexColor;
 
                 var baseCube = new CubeInteger(0, 0, 0);
+
+
+                //@TODO: maybe size must be hardcoded to avoid issue with window width and height
 
                 Hexagon.Lib.Layout layout = 
                     new(orientation: HexOrientation ? Orientation.Pointy : Orientation.Flat, size: HexSize, origin: new(center.X, center.Y));

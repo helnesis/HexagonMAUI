@@ -73,12 +73,12 @@
                     <HorizontalStackLayout>
                         
                         <GraphicsView
-                            HorizontalOptions="End"
+                            HorizontalOptions="Center"
                             VerticalOptions="Center"
                             x:Name="individualGraphicsView"
                             Drawable="{StaticResource individualDrawable}"
-                            HeightRequest="200"
-                            WidthRequest="200">
+                            HeightRequest="100"
+                            WidthRequest="150">
                         </GraphicsView>
                         
                     </HorizontalStackLayout>
