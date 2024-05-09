@@ -121,6 +121,7 @@ namespace HexaMaui.App.Manager
 
             var center = _Layout!.HexToPixel(coordinate);
 
+
             // Hexagon position
             float centerX = (float)center.X;
             float centerY = (float)center.Y;

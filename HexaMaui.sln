@@ -5,9 +5,7 @@ VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HexaMaui.App", "src\HexaMaui.App\HexaMaui.App.csproj", "{7BB7ADA9-E6C7-4F83-A2E6-BA7EF98923A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexaMaui.Console", "src\HexaMaui.Console\HexaMaui.Console.csproj", "{D324CB82-AAA5-47D9-AF12-97F0F13F107E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexagon.Lib", "src\HexaMaui.Lib\Hexagon.Lib\Hexagon.Lib.csproj", "{5F0E90C3-C690-46EE-B663-A3AE445F29E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hexagon.Lib", "src\HexaMaui.Lib\Hexagon.Lib\Hexagon.Lib.csproj", "{5F0E90C3-C690-46EE-B663-A3AE445F29E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +19,6 @@ Global
 		{7BB7ADA9-E6C7-4F83-A2E6-BA7EF98923A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BB7ADA9-E6C7-4F83-A2E6-BA7EF98923A6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7BB7ADA9-E6C7-4F83-A2E6-BA7EF98923A6}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{D324CB82-AAA5-47D9-AF12-97F0F13F107E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D324CB82-AAA5-47D9-AF12-97F0F13F107E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D324CB82-AAA5-47D9-AF12-97F0F13F107E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D324CB82-AAA5-47D9-AF12-97F0F13F107E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5F0E90C3-C690-46EE-B663-A3AE445F29E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5F0E90C3-C690-46EE-B663-A3AE445F29E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F0E90C3-C690-46EE-B663-A3AE445F29E7}.Release|Any CPU.ActiveCfg = Release|Any CPU

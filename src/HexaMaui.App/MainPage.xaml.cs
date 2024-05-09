@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using Hexagon.Lib.Coordinates;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace HexaMaui.App
 {
@@ -9,6 +11,7 @@ namespace HexaMaui.App
         private bool _Color = true;
         private double _SizeX = 25;
         private double _SizeY = 25;
+        private Hex? _SelectedHexagon = null;
 
         public MainPage()
         {
@@ -69,6 +72,27 @@ namespace HexaMaui.App
         private void xSize_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void graphicsView_StartInteraction(object sender, TouchEventArgs e)
+        {
+            if (hexDrawable.Layout is not null)
+            {
+                var layout = hexDrawable.Layout;
+
+                PointF click = e.Touches.FirstOrDefault();
+
+                var hexCoord 
+                    = layout.Layout!.PixelToHex(new(click.X, click.Y));
+
+                var hexagon = layout.Hexagons.FirstOrDefault(h => h.Equals(hexCoord));
+
+                if (hexagon is not null)
+                {
+                    _SelectedHexagon = hexagon;
+                    HexagonID.Text = hexagon.Identifier.ToString();
+                }
+            }
         }
     }
 

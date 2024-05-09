@@ -4,6 +4,12 @@ namespace Hexagon.Lib
 {
     public static class Shapes
     {
+        /// <summary>
+        /// Generate a hexagon shape to N levels.
+        /// </summary>
+        /// <param name="n">Level/layer count</param>
+        /// <param name="sort">Must be sorted or not</param>
+        /// <returns>Hexagons</returns>
         public static HashSet<Hex> Hexagons(int n, bool sort = false)
         {
             HashSet<Hex> cubes = [];
@@ -24,7 +30,7 @@ namespace Hexagon.Lib
                 var sortedList = cubes.ToList();
                 sortedList.Sort();
 
-                return sortedList.ToHashSet();
+                return [.. sortedList];
             }
 
             return cubes;

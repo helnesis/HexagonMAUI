@@ -65,6 +65,11 @@
                         <Entry StyleId="entryY" TextChanged="Size_TextChanged" HeightRequest="1" WidthRequest="100" x:Name="ySize" />
                     </HorizontalStackLayout>
 
+                    <Label Text="Hexagone sélectionné : "/>
+
+                    <HorizontalStackLayout>
+                        <Label x:Name="HexagonID"/>
+                    </HorizontalStackLayout>
 
                 </VerticalStackLayout>
                 
@@ -75,6 +80,7 @@
         <Grid x:Name="hexagonGrid" Grid.Column="1">
             <GraphicsView
                 HorizontalOptions="End"
+                StartInteraction="graphicsView_StartInteraction"
                 VerticalOptions="Center"
                 x:Name="graphicsView"
                 Drawable="{StaticResource drawable}"
