@@ -80,9 +80,10 @@ namespace HexaMaui.App
                 PointF click = e.Touches.FirstOrDefault();
 
                 var hexCoord 
-                    = layout.Layout!.PixelToHex(new(click.X, click.Y));
+                    = layout.Layout!.PixelToHex(new(click.X, click.Y)).Round();
 
-                var hexagon = layout.Hexagons.FirstOrDefault(h => h.Equals(hexCoord));
+                var hexagon = 
+                    layout.Hexagons.FirstOrDefault(h => h.Equals(hexCoord));
 
                 if (hexagon is not null)
                 {

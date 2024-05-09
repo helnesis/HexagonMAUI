@@ -31,7 +31,7 @@ namespace Hexagon.Lib
         }
 
         
-        /*
+        
         public FloatedCube PixelToHex(Point p)
         {
             Point pt = new((p.X - Origin.X) / Size.X, 
@@ -42,8 +42,9 @@ namespace Hexagon.Lib
 
             return new FloatedCube(q, r, -q - r);
         }
-        */
+        
 
+        /*
         public Hex PixelToHex(Point p)
         {
             Point pt = new((p.X - Origin.X) / Size.X,
@@ -54,6 +55,7 @@ namespace Hexagon.Lib
 
             return new Hex(q, r, -q - r);
         }
+        */
 
         public Point HexCornerOffset(int corner)
         {
