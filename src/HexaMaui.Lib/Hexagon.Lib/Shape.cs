@@ -4,9 +4,9 @@ namespace Hexagon.Lib
 {
     public static class Shapes
     {
-        public static HashSet<CubeInteger> Hexagons(int n, bool sort = false)
+        public static HashSet<Hex> Hexagons(int n, bool sort = false)
         {
-            HashSet<CubeInteger> cubes = [];
+            HashSet<Hex> cubes = [];
 
             for (int q = -n; q <= n; q++)
             {
@@ -15,7 +15,7 @@ namespace Hexagon.Lib
 
                 for (int r = r1; r <= r2; r++)
                 {
-                    cubes.Add(new CubeInteger(q, r, -q - r));
+                    cubes.Add(new Hex(q, r, -q - r));
                 }
             }
 
@@ -29,33 +29,5 @@ namespace Hexagon.Lib
 
             return cubes;
         }
-
-        public static HashSet<CubeInteger> Parallelogram(int width, int height, bool sort = false)
-        {
-            HashSet<CubeInteger> cubes = [];
-
-            // Parallelogram with hexagons
-            for (int q = 0; q < width; q++)
-            {
-                int r1 = Math.Max(-q, -height);
-                int r2 = Math.Min(width - q, height);
-
-                for (int r = r1; r < r2; r++)
-                {
-                    cubes.Add(new CubeInteger(q, r, -q - r));
-                }
-            }
-
-            if (sort)
-            {
-                var sortedList = cubes.ToList();
-                sortedList.Sort();
-
-                return sortedList.ToHashSet();
-            }
-
-            return cubes;
-        }
-
     }
 }

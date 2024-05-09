@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hexagon.Lib
+﻿namespace Hexagon.Lib
 {
     public partial class Point(double x, double y)
     {
-
         public Point(double x) : this(x, x) { }
 
         private readonly double _X = x;

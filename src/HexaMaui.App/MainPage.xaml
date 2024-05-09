@@ -3,20 +3,87 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:drawable="clr-namespace:HexaMaui.App.Drawable"
              x:Class="HexaMaui.App.MainPage">
-    
+
     <ContentPage.Resources>
-        <drawable:HexDrawable x:Key="drawable"/>
+        <drawable:HexDrawable x:Name="hexDrawable" x:Key="drawable"/>
     </ContentPage.Resources>
-    
-    <ScrollView>
-        <VerticalStackLayout>
+
+
+    <Grid x:Name="mainGrid">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="layoutMgrGrid" Grid.Column="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
+                <VerticalStackLayout Margin="10" Grid.Column="1" Grid.Row="0">
+                    
+                    <Label HorizontalOptions="Center" 
+                      Grid.Column="1" FontSize="20" 
+                      FontFamily="Arial" FontAttributes="Bold" 
+                      Text="Layout Manager"/>
+
+                    <Label HorizontalOptions="Center" FontAttributes="Italic" 
+                           VerticalOptions="Center" Text="Manage your hexagons easily!"/>
+
+
+                    <HorizontalStackLayout>
+                        <Label Grid.Column="1" Grid.Row="0" Text="Layer count :"/>
+                        <Label x:Name="sliderValue" Grid.Column="1" Grid.Row="1"/>
+                    </HorizontalStackLayout>
+                    
+                    <Slider Minimum="1" ValueChanged="Slider_ValueChanged" Maximum="10"/>
+
+                    <Label Text="Orientation: " />
+
+                    <HorizontalStackLayout>
+                        <CheckBox CheckedChanged="orientationCbx_CheckedChanged" x:Name="orientationCbx" Grid.Row="1"/>
+                        <Label Margin="10" x:Name="orientation" />
+                    </HorizontalStackLayout>
+
+
+                    <Label Text="Taille (Rayon)"/>
+
+                    <HorizontalStackLayout Spacing="5">
+                        <Label Margin="20" Text="X:"/>
+                        <Entry StyleId="entryX" TextChanged="Size_TextChanged" HeightRequest="1" WidthRequest="100" x:Name="xSize" />
+
+                        <Label Margin="20" Text="Y:"/>
+                        <Entry StyleId="entryY" TextChanged="Size_TextChanged" HeightRequest="1" WidthRequest="100" x:Name="ySize" />
+                    </HorizontalStackLayout>
+
+
+                </VerticalStackLayout>
+                
+                
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="hexagonGrid" Grid.Column="1">
             <GraphicsView
+                HorizontalOptions="End"
+                VerticalOptions="Center"
                 x:Name="graphicsView"
                 Drawable="{StaticResource drawable}"
                 HeightRequest="1200"
                 WidthRequest="1200">
             </GraphicsView>
-        </VerticalStackLayout>
-    </ScrollView>
+        </Grid>
 
+    </Grid>
+    
+    
 </ContentPage>

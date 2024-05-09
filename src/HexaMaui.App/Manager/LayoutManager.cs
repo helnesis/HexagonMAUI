@@ -9,32 +9,32 @@ namespace HexaMaui.App.Manager
 {
     public sealed class LayoutManager
     {
-        private readonly Layout _Layout;
+        #region Attributes
+
+        private Layout? _Layout;
 
         private readonly Point _Size;
 
-        private readonly Point _Origin;
-
         private readonly bool _HasColor;
 
-        private readonly ICanvas _Canvas;
-
         private readonly int _LayerCount;
+
+        private readonly bool _Orientation;
+
+        #endregion
+
+
+        #region Properties
 
         /// <summary>
         /// The layout of the hexagon.
         /// </summary>
-        public Layout Layout { get { return _Layout; } }
+        public Layout? Layout { get { return _Layout; } }
 
         /// <summary>
         /// The size of the hexagon (inner radius).
         /// </summary>
         public Point Size { get { return _Size; } }
-
-        /// <summary>
-        /// The origin of the hexagon.
-        /// </summary>
-        public Point Origin { get { return _Origin; } }
 
         /// <summary>
         /// Number of layers.
@@ -46,6 +46,10 @@ namespace HexaMaui.App.Manager
         /// </summary>
         public bool HasColor { get { return _HasColor; } }
 
+        public List<Hex> Hexagons { get; init; } = [];
+
+        #endregion
+
         /// <summary>
         /// Create a hexagon shape.
         /// </summary>
@@ -54,27 +58,29 @@ namespace HexaMaui.App.Manager
         /// <param name="origin">Origin</param>
         /// <param name="orientation">Hexagon layout, set to true for pointy, false for flat.</param>
         /// <param name="color">Color</param>
-        /// <param name="canvas">Canvas</param>
         /// <exception cref="ArgumentException"></exception>
-        public LayoutManager(int layerCount, Point size, Point origin, bool orientation, ICanvas canvas, bool color = false)
+        public LayoutManager(int layerCount, Point size, bool orientation, bool color = false)
         {
             if (layerCount < 1)
                 throw new ArgumentException("Layer count must be greater than 0");
 
             _LayerCount = layerCount;
             _Size = size;
-            _Origin = origin;
+            _Orientation = orientation;
             _HasColor = color;
-            _Canvas = canvas;
-
-            _Layout = new Layout(orientation ? Orientation.Pointy : Orientation.Flat, size, origin);
-
-            Generate();
         }
 
-
-        private void Generate()
+        public void GenerateShape(ICanvas canvas, RectF dirtyRect)
         {
+            Generate(canvas, dirtyRect);
+        }
+
+        #region Private methods
+        private void Generate(ICanvas canvas, RectF dirtyRect)
+        {
+            _Layout = 
+                new Layout(_Orientation ? Orientation.Pointy : Orientation.Flat, _Size, new(dirtyRect.Center.X, dirtyRect.Center.Y));
+
             var shapeCoordinates = Shapes.Hexagons(_LayerCount, true);
 
             var hexIndex = 0;
@@ -93,25 +99,27 @@ namespace HexaMaui.App.Manager
                     h += step;
 
                     shape.RGB = new(rgb.R, rgb.G, rgb.B);
-                    _Canvas.FillColor = Color.FromRgb(shape.RGB.R, shape.RGB.G, shape.RGB.B);
+                    canvas.FillColor = Color.FromRgb(shape.RGB.R, shape.RGB.G, shape.RGB.B);
                 }
-     
 
                 shape.Identifier = hexIndex++;
 
-                Create(shape);
+                Create(shape, canvas);
+                Hexagons.Add(shape);
             }
 
         }
-
-        private void Create(CubeInteger coordinate)
+        private void Create(Hex coordinate, ICanvas canvas)
         {
+            if (_Layout is null)
+                throw new Exception("Layout cannot be null. It determines the shape of each hexagon!");
+
             using var pathf = new PathF();
 
             var points =
-                _Layout.PolygonCorners(coordinate).ToList();
+                _Layout!.PolygonCorners(coordinate).ToList();
 
-            var center = _Layout.HexToPixel(coordinate);
+            var center = _Layout!.HexToPixel(coordinate);
 
             // Hexagon position
             float centerX = (float)center.X;
@@ -128,18 +136,20 @@ namespace HexaMaui.App.Manager
                 pathf.LineTo((float)points[i].X, (float)points[i].Y);
             }
 
-            var cubeCenter = _Layout.HexToPixel(coordinate);
+            var cubeCenter = _Layout!.HexToPixel(coordinate);
 
 
             pathf.Close();
 
             
-            _Canvas.FillPath(pathf);
-            _Canvas.DrawPath(pathf);
+            canvas.FillPath(pathf);
+            canvas.DrawPath(pathf);
 
-            _Canvas.FontColor = Colors.Black;
-            _Canvas.DrawString(coordinate.Identifier.ToString(), centerX, centerY, HorizontalAlignment.Center);
+            canvas.FontColor = Colors.Black;
+            canvas.DrawString(coordinate.Identifier.ToString(), centerX, centerY, HorizontalAlignment.Center);
         }
+
+        #endregion
 
     }
 }

@@ -1,8 +1,33 @@
-﻿using System.Drawing;
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace Hexagon.Lib.Coordinates
 {
+
+    public sealed class Hex(int q, int r, int s) : CubeInteger(q, r, s), IComparable<Hex> 
+    {
+        public int Identifier { get; set; }
+        public (byte R, byte G, byte B) RGB { get; set; }
+        public int CompareTo(Hex? other)
+        {
+            if (other is null) return 1;
+
+            int thisDistance = this.Length;
+            int otherDistance = other.Length;
+
+            int distanceComparison = thisDistance.CompareTo(otherDistance);
+
+            if (distanceComparison != 0)
+            {
+                return distanceComparison;
+            }
+
+            double thisAngle = Math.Atan2(R, Q);
+            double otherAngle = Math.Atan2(other.R, other.Q);
+
+            return thisAngle.CompareTo(otherAngle);
+        }
+    }
+
     /// <summary>
     /// Cube, but with floating point numbers.
     /// </summary>
@@ -49,37 +74,14 @@ namespace Hexagon.Lib.Coordinates
     /// <summary>
     /// Cube, but with signed integers.
     /// </summary>
-    public sealed class CubeInteger(int q, int r, int s) : Cube<int>(q, r, s), IComparable<CubeInteger>
+    public class CubeInteger(int q, int r, int s) : Cube<int>(q, r, s)
     {
-        public int Identifier { get; set; }
-        public (byte R, byte G, byte B) RGB { get; set; }
-
         public static readonly IEnumerable<CubeInteger> Directions 
             = [ new (1, 0, -1),new (1, -1, 0),new (0, -1, 1), new (-1, 0, 1),new (-1, 1, 0),new(0, 1, -1) ];
         public static CubeInteger Direction(int direction)
             => Directions.ElementAt((6 + (direction % 6)) % 6);
         public static CubeInteger Neighbor(CubeInteger cube, int direction)
             => (CubeInteger)(cube + Direction(direction));
-
-        public int CompareTo(CubeInteger? other)
-        {
-            if (other is null) return 1;
-
-            int thisDistance = this.Length;
-            int otherDistance = other.Length;
-
-            int distanceComparison = thisDistance.CompareTo(otherDistance);
-
-            if (distanceComparison != 0)
-            {
-                return distanceComparison;
-            }
-
-            double thisAngle = Math.Atan2(R, Q);
-            double otherAngle = Math.Atan2(other.R, other.Q);
-            return thisAngle.CompareTo(otherAngle);
-
-        }
     }
 
     /// <summary>
@@ -108,7 +110,6 @@ namespace Hexagon.Lib.Coordinates
 
             if (q + r + s != TNumber.Zero)
                 throw new ArgumentException("q + r + s must be equals to 0");
-
 
             _Q = q;
             _R = r;
