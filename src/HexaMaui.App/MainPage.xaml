@@ -44,7 +44,7 @@
 
 
                     <HorizontalStackLayout>
-                        <Label Grid.Column="1" Grid.Row="0" Text="Layer count :"/>
+                        <Label Grid.Column="1" Grid.Row="0" Text="Layer count : "/>
                         <Label x:Name="sliderValue" Grid.Column="1" Grid.Row="1"/>
                     </HorizontalStackLayout>
 
@@ -58,7 +58,7 @@
                     </HorizontalStackLayout>
 
 
-                    <Label Text="Taille (Rayon)"/>
+                    <Label Text="Taille"/>
 
                     <HorizontalStackLayout Spacing="5">
                         <Label Margin="20" Text="X:"/>
@@ -89,10 +89,13 @@
             </Grid>
         </Grid>
 
-        <Grid x:Name="hexagonGrid" Grid.Column="1">
+        <Grid Margin="2" BackgroundColor="Black" x:Name="hexagonGrid" Grid.Column="1">
+            
+                        
+            
             <GraphicsView
                 HorizontalOptions="End"
-                StartInteraction="graphicsView_StartInteraction"
+                StartInteraction="GraphicsView_StartInteraction"
                 VerticalOptions="Center"
                 x:Name="graphicsView"
                 Drawable="{StaticResource drawable}"

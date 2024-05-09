@@ -11,7 +11,7 @@ namespace HexaMaui.App
         private bool _Color = true;
         private double _SizeX = 25;
         private double _SizeY = 25;
-        private Hex? _SelectedHexagon = null;
+        private bool _HasSelectedHexagon = false;
 
         public MainPage()
         {
@@ -31,6 +31,8 @@ namespace HexaMaui.App
             sliderValue.Text = _LayerCount.ToString();
 
             hexDrawable.ApplySettings(layerCount: _LayerCount, size: new(_SizeX, _SizeY), orientation: _Orientation, hasColor: _Color);
+
+            ResetSelectedHexagon();
             graphicsView.Invalidate();
 
         }
@@ -38,8 +40,15 @@ namespace HexaMaui.App
         private void orientationCbx_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             _Orientation = e.Value;
-            orientation.Text = _Orientation ? "Orientation: Pointe" : "Orientation: Plat";
+            orientation.Text = _Orientation ? "Pointe" : "Plat";
             hexDrawable.ApplySettings(layerCount: _LayerCount, size: new(_SizeX, _SizeY), orientation: _Orientation, hasColor: _Color);
+            
+            if (_HasSelectedHexagon)
+            {
+                hexDrawableIndividual.HexOrientation = _Orientation;
+                individualGraphicsView.Invalidate();
+            }
+
             graphicsView.Invalidate();
 
         }
@@ -71,7 +80,7 @@ namespace HexaMaui.App
             }
         }
 
-        private void graphicsView_StartInteraction(object sender, TouchEventArgs e)
+        private void GraphicsView_StartInteraction(object sender, TouchEventArgs e)
         {
             if (hexDrawable.Layout is not null)
             {
@@ -87,15 +96,27 @@ namespace HexaMaui.App
 
                 if (hexagon is not null)
                 {
-                    _SelectedHexagon = hexagon;
+
                     hexDrawableIndividual.HexSize = layout.Size;
                     hexDrawableIndividual.HexOrientation = layout.HexagonOrientation;
                     hexDrawableIndividual.HexColor = Color.FromRgb(hexagon.RGB.R, hexagon.RGB.G, hexagon.RGB.B);
                     hexDrawableIndividual.Identifier = hexagon.Identifier;
 
+                    _HasSelectedHexagon = true;
                     individualGraphicsView.Invalidate();
                 }
             }
+        }
+
+        private void ResetSelectedHexagon()
+        {
+
+            hexDrawableIndividual.HexSize = null;
+            hexDrawableIndividual.HexOrientation = true;
+            hexDrawableIndividual.HexColor = null;
+            hexDrawableIndividual.Identifier = 0;
+            individualGraphicsView.Invalidate();
+
         }
     }
 

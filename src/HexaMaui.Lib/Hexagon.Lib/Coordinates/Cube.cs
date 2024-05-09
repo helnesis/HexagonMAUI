@@ -2,7 +2,9 @@
 
 namespace Hexagon.Lib.Coordinates
 {
-
+    /// <summary>
+    /// Represents a hexagon, exprimed in cube coordinates.
+    /// </summary>
     public sealed class Hex(int q, int r, int s) : CubeInteger(q, r, s), IComparable<Hex> 
     {
         public int Identifier { get; set; }
