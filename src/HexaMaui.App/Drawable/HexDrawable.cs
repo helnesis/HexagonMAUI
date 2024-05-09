@@ -1,5 +1,4 @@
 ﻿using HexaMaui.App.Manager;
-using Windows.Devices.Bluetooth.Advertisement;
 
 namespace HexaMaui.App.Drawable
 {

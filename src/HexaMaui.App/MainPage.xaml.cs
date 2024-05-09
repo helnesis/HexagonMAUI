@@ -50,28 +50,25 @@ namespace HexaMaui.App
 
             if (entry is not null)
             {
-                //Regular expressions are used to match whether the user input contains numbers
                 string result = Regex.Replace(e.NewTextValue, @"[^0-9]+", "");
+
                 if (Regex.Match(result, @"^[0-9]+$").Success)
                 {
+                    double v = double.Parse(result);
+
                     if (entry.StyleId == "entryX")
                     {
-                        _SizeX = double.Parse(result);
+                        _SizeX = v;
                     }
                     else
                     {
-                        _SizeY = double.Parse(result);
+                        _SizeY = v;
                     }
                 }
 
                 hexDrawable.ApplySettings(layerCount: _LayerCount, size: new(_SizeX, _SizeY), orientation: _Orientation, hasColor: _Color);
                 graphicsView.Invalidate();
             }
-        }
-
-        private void xSize_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
 
         private void graphicsView_StartInteraction(object sender, TouchEventArgs e)
@@ -90,7 +87,12 @@ namespace HexaMaui.App
                 if (hexagon is not null)
                 {
                     _SelectedHexagon = hexagon;
-                    HexagonID.Text = hexagon.Identifier.ToString();
+                    hexDrawableIndividual.HexSize = layout.Size;
+                    hexDrawableIndividual.HexOrientation = layout.HexagonOrientation;
+                    hexDrawableIndividual.HexColor = Color.FromRgb(hexagon.RGB.R, hexagon.RGB.G, hexagon.RGB.B);
+                    hexDrawableIndividual.Identifier = hexagon.Identifier;
+
+                    individualGraphicsView.Invalidate();
                 }
             }
         }

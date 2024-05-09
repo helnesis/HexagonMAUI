@@ -46,6 +46,12 @@ namespace HexaMaui.App.Manager
         /// </summary>
         public bool HasColor { get { return _HasColor; } }
 
+
+        /// <summary>
+        /// Hexagon orientation
+        /// </summary>
+        public bool HexagonOrientation { get { return _Orientation; } }
+
         public List<Hex> Hexagons { get; init; } = [];
 
         #endregion
@@ -136,8 +142,6 @@ namespace HexaMaui.App.Manager
             {
                 pathf.LineTo((float)points[i].X, (float)points[i].Y);
             }
-
-            var cubeCenter = _Layout!.HexToPixel(coordinate);
 
 
             pathf.Close();

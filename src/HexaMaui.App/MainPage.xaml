@@ -6,11 +6,14 @@
 
     <ContentPage.Resources>
         <drawable:HexDrawable x:Name="hexDrawable" x:Key="drawable"/>
+        <drawable:IndividualHexDrawable x:Name="hexDrawableIndividual" x:Key="individualDrawable"/>
     </ContentPage.Resources>
 
 
+
+
     <Grid x:Name="mainGrid">
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
@@ -30,7 +33,7 @@
 
 
                 <VerticalStackLayout Margin="10" Grid.Column="1" Grid.Row="0">
-                    
+
                     <Label HorizontalOptions="Center" 
                       Grid.Column="1" FontSize="20" 
                       FontFamily="Arial" FontAttributes="Bold" 
@@ -44,7 +47,7 @@
                         <Label Grid.Column="1" Grid.Row="0" Text="Layer count :"/>
                         <Label x:Name="sliderValue" Grid.Column="1" Grid.Row="1"/>
                     </HorizontalStackLayout>
-                    
+
                     <Slider Minimum="1" ValueChanged="Slider_ValueChanged" Maximum="10"/>
 
                     <Label Text="Orientation: " />
@@ -68,12 +71,21 @@
                     <Label Text="Hexagone sélectionné : "/>
 
                     <HorizontalStackLayout>
-                        <Label x:Name="HexagonID"/>
+                        
+                        <GraphicsView
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            x:Name="individualGraphicsView"
+                            Drawable="{StaticResource individualDrawable}"
+                            HeightRequest="200"
+                            WidthRequest="200">
+                        </GraphicsView>
+                        
                     </HorizontalStackLayout>
 
                 </VerticalStackLayout>
-                
-                
+
+
             </Grid>
         </Grid>
 
@@ -90,6 +102,6 @@
         </Grid>
 
     </Grid>
-    
-    
+
+
 </ContentPage>
