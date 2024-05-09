@@ -68,6 +68,14 @@
                         <Entry StyleId="entryY" TextChanged="Size_TextChanged" HeightRequest="1" WidthRequest="100" x:Name="ySize" />
                     </HorizontalStackLayout>
 
+                    <Label Text="Affichage de l'identifiant"/>
+
+                    <HorizontalStackLayout>
+                        <CheckBox CheckedChanged="displayIdentifier_CheckedChanged" x:Name="displayIdentifier" />
+                        <Label x:Name="displayIdentifierText" Text="Oui" Margin="20"/>
+                    </HorizontalStackLayout>
+
+
                     <Label Text="Hexagone sélectionné : "/>
 
                     <HorizontalStackLayout>

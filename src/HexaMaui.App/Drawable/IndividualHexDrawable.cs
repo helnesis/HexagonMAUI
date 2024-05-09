@@ -9,7 +9,7 @@ namespace HexaMaui.App.Drawable
         public Hexagon.Lib.Point? HexSize { get; set; }
 
         // Identifier
-        public int Identifier { get; set; }
+        public int? Identifier { get; set; }
 
         // Color
         public Color? HexColor { get; set; }
@@ -60,7 +60,9 @@ namespace HexaMaui.App.Drawable
 
 
                 canvas.FontColor = Colors.Black;
-                canvas.DrawString(Identifier.ToString(), cX, cY, HorizontalAlignment.Center);
+
+                if (Identifier is not null)
+                    canvas.DrawString(Identifier.ToString(), cX, cY, HorizontalAlignment.Center);
 
 
             }
