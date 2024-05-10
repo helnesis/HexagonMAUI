@@ -32,25 +32,26 @@
                 </Grid.RowDefinitions>
 
 
-                <VerticalStackLayout Margin="10" Grid.Column="1" Grid.Row="0">
+                <VerticalStackLayout Margin="10" Spacing="15" Grid.Column="1" Grid.Row="0">
 
                     <Label HorizontalOptions="Center" 
                       Grid.Column="1" FontSize="20" 
                       FontFamily="Arial" FontAttributes="Bold" 
                       Text="Layout Manager"/>
+                    
+                    <HorizontalStackLayout Spacing="10">
+                        <Label FontAttributes="Bold" VerticalTextAlignment="Center" Text="Nombre maximum de couches : "/>
+                        <Entry HorizontalOptions="Start" HeightRequest="30" TextChanged="layerMax_TextChanged" MinimumHeightRequest="25" x:Name="layerMax" />
+                    </HorizontalStackLayout>
 
-                    <Label HorizontalOptions="Center" FontAttributes="Italic" 
-                           VerticalOptions="Center" Text="Manage your hexagons easily!"/>
-
-
-                    <HorizontalStackLayout>
-                        <Label Grid.Column="1" Grid.Row="0" Text="Layer count : "/>
+                    <HorizontalStackLayout Spacing="5">
+                        <Label FontAttributes="Bold" Grid.Column="1" Grid.Row="0" Text="Couche(s) actuelle(s) : "/>
                         <Label x:Name="sliderValue" Grid.Column="1" Grid.Row="1"/>
                     </HorizontalStackLayout>
 
-                    <Slider Minimum="1" ValueChanged="Slider_ValueChanged" Maximum="10"/>
+                    <Slider x:Name="layerSlide" Minimum="1" ValueChanged="Slider_ValueChanged" Maximum="10"/>
 
-                    <Label Text="Orientation: " />
+                    <Label FontAttributes="Bold" Text="Orientation des hexagones" />
 
                     <HorizontalStackLayout>
                         <CheckBox CheckedChanged="orientationCbx_CheckedChanged" x:Name="orientationCbx" Grid.Row="1"/>
@@ -58,17 +59,17 @@
                     </HorizontalStackLayout>
 
 
-                    <Label Text="Taille"/>
+                    <Label FontAttributes="Bold" Text="Taille des hexagones"/>
 
-                    <HorizontalStackLayout Spacing="5">
-                        <Label Margin="20" Text="X:"/>
-                        <Entry StyleId="entryX" TextChanged="Size_TextChanged" HeightRequest="1" WidthRequest="100" x:Name="xSize" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Label VerticalTextAlignment="Center" Text="X:"/>
+                        <Entry StyleId="entryX" TextChanged="Size_TextChanged" HeightRequest="30" MinimumHeightRequest="25" x:Name="xSize" />
 
-                        <Label Margin="20" Text="Y:"/>
-                        <Entry StyleId="entryY" TextChanged="Size_TextChanged" HeightRequest="1" WidthRequest="100" x:Name="ySize" />
+                        <Label VerticalTextAlignment="Center" Text="Y:"/>
+                        <Entry StyleId="entryY" TextChanged="Size_TextChanged" HeightRequest="30" MinimumHeightRequest="25" x:Name="ySize" />
                     </HorizontalStackLayout>
 
-                    <Label Text="Affichage de l'identifiant"/>
+                    <Label FontAttributes="Bold" Text="Afficher l'identifiant des hexagones"/>
 
                     <HorizontalStackLayout>
                         <CheckBox CheckedChanged="displayIdentifier_CheckedChanged" x:Name="displayIdentifier" />
@@ -76,7 +77,7 @@
                     </HorizontalStackLayout>
 
 
-                    <Label Text="Hexagone sélectionné : "/>
+                    <Label FontAttributes="Bold" Text="Hexagone sélectionné"/>
 
                     <HorizontalStackLayout>
                         

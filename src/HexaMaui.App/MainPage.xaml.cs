@@ -11,6 +11,7 @@ namespace HexaMaui.App
         private bool _Color = true;
         private double _SizeX = 25;
         private double _SizeY = 25;
+        private int _LayerMax = 10;
         private bool _DisplayIdentifier = true;
         private bool _HasSelectedHexagon = false;
 
@@ -21,6 +22,8 @@ namespace HexaMaui.App
         public MainPage()
         {
             InitializeComponent();
+            layerMax.Text = _LayerMax.ToString();
+            layerSlide.Maximum = _LayerMax;
             sliderValue.Text = _LayerCount.ToString();
             displayIdentifierText.Text = "Oui";
             displayIdentifier.IsChecked = _DisplayIdentifier;
@@ -154,7 +157,17 @@ namespace HexaMaui.App
 
         }
 
-    
+        private void layerMax_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string result = Regex.Replace(e.NewTextValue, @"[^0-9]+", "");
+
+            if (Regex.Match(result, @"^[0-9]+$").Success)
+            {
+                int v = int.Parse(result);
+                _LayerMax = v;
+                layerSlide.Maximum = _LayerMax;
+            }
+        }
     }
 
 }

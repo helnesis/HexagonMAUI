@@ -12,6 +12,7 @@ namespace Hexagon.Lib
         /// <returns>Hexagons</returns>
         public static HashSet<Hex> Hexagons(int n, bool sort = false)
         {
+
             HashSet<Hex> cubes = [];
 
             for (int q = -n; q <= n; q++)
