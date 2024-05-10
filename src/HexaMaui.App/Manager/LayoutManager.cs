@@ -105,6 +105,7 @@ namespace HexaMaui.App.Manager
                 {
                     HSL hsl = new(h, s, l);
                     RGB rgb = ColorHelper.ColorConverter.HslToRgb(hsl);
+
                     h += step;
 
                     shape.RGB = new(rgb.R, rgb.G, rgb.B);

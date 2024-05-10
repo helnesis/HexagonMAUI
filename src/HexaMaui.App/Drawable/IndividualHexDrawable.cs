@@ -48,7 +48,7 @@ namespace HexaMaui.App.Drawable
 
                 pathf.MoveTo(oX, oY);
 
-                for(int i = 1; i < p.Count; i++)
+                for(int i = 0; i < p.Count; i++)
                 {
                     pathf.LineTo((float)p[i].X, (float)p[i].Y);
                 }
