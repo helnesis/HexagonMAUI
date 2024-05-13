@@ -6,7 +6,7 @@ namespace HexaMaui.App
 {
     public partial class MainPage : ContentPage
     {
-        private int _LayerCount = 1;
+        private int _LayerCount = 5;
         private bool _Orientation = true;
         private bool _Color = true;
         private double _SizeX = 25;
@@ -25,6 +25,7 @@ namespace HexaMaui.App
             InitializeComponent();
             layerMax.Text = _LayerMax.ToString();
             layerSlide.Maximum = _LayerMax;
+            layerSlide.Value = _LayerCount;
             sliderValue.Text = _LayerCount.ToString();
 
             sortHexagon.IsChecked = _SortHexagon;
