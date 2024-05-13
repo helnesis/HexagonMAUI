@@ -31,7 +31,7 @@ namespace HexaMaui.App.Drawable
                 //@TODO: maybe size must be hardcoded to avoid issue with window width and height
 
                 Hexagon.Lib.Layout layout = 
-                    new(orientation: HexOrientation ? Orientation.Pointy : Orientation.Flat, size: HexSize, origin: new(center.X, center.Y));
+                    new(orientation: HexOrientation ? Orientation.Pointy : Orientation.Flat, size: new(25), origin: new(center.X, center.Y));
 
                 using var pathf = new PathF();
 

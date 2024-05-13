@@ -14,6 +14,7 @@ namespace HexaMaui.App
         private int _LayerMax = 10;
         private bool _DisplayIdentifier = true;
         private bool _HasSelectedHexagon = false;
+        private bool _SortHexagon = true;
 
 
         private int? _SelectedHexagonIdentifier = 0;
@@ -25,6 +26,9 @@ namespace HexaMaui.App
             layerMax.Text = _LayerMax.ToString();
             layerSlide.Maximum = _LayerMax;
             sliderValue.Text = _LayerCount.ToString();
+
+            sortHexagon.IsChecked = _SortHexagon;
+            sortHexagonText.Text = "Oui";
             displayIdentifierText.Text = "Oui";
             displayIdentifier.IsChecked = _DisplayIdentifier;
             orientation.Text += _Orientation ? "Pointe" : "Plat";
@@ -33,7 +37,7 @@ namespace HexaMaui.App
             ySize.Text = _SizeY.ToString();
             xSize.Text = _SizeX.ToString();
 
-            hexDrawable.ApplySettings(layerCount: _LayerCount, size: new(_SizeX, _SizeY), orientation: _Orientation, hasColor: _Color, displayNumber: _DisplayIdentifier);
+            hexDrawable.ApplySettings(layerCount: _LayerCount, size: new(_SizeX, _SizeY), orientation: _Orientation, hasColor: _Color, displayNumber: _DisplayIdentifier, sortHexagons: _SortHexagon);
 
         }
 
@@ -42,7 +46,7 @@ namespace HexaMaui.App
             _LayerCount = (int)e.NewValue;
             sliderValue.Text = _LayerCount.ToString();
 
-            hexDrawable.ApplySettings(layerCount: _LayerCount, size: new(_SizeX, _SizeY), orientation: _Orientation, hasColor: _Color, displayNumber: _DisplayIdentifier);
+            hexDrawable.ApplySettings(layerCount: _LayerCount, size: new(_SizeX, _SizeY), orientation: _Orientation, hasColor: _Color, displayNumber: _DisplayIdentifier, sortHexagons: _SortHexagon);
 
             ResetSelectedHexagon();
             graphicsView.Invalidate();
@@ -53,7 +57,7 @@ namespace HexaMaui.App
         {
             _Orientation = e.Value;
             orientation.Text = _Orientation ? "Pointe" : "Plat";
-            hexDrawable.ApplySettings(layerCount: _LayerCount, size: new(_SizeX, _SizeY), orientation: _Orientation, hasColor: _Color, displayNumber: _DisplayIdentifier);
+            hexDrawable.ApplySettings(layerCount: _LayerCount, size: new(_SizeX, _SizeY), orientation: _Orientation, hasColor: _Color, displayNumber: _DisplayIdentifier, sortHexagons: _SortHexagon);
 
             if (_HasSelectedHexagon)
             {
@@ -87,7 +91,7 @@ namespace HexaMaui.App
                     }
                 }
 
-                hexDrawable.ApplySettings(layerCount: _LayerCount, size: new(_SizeX, _SizeY), orientation: _Orientation, hasColor: _Color, displayNumber: _DisplayIdentifier);
+                hexDrawable.ApplySettings(layerCount: _LayerCount, size: new(_SizeX, _SizeY), orientation: _Orientation, hasColor: _Color, displayNumber: _DisplayIdentifier, sortHexagons: _SortHexagon);
                 graphicsView.Invalidate();
             }
         }
@@ -107,8 +111,8 @@ namespace HexaMaui.App
                 hexDrawableIndividual.Identifier = null;
             }
 
-            hexDrawable.ApplySettings(layerCount: _LayerCount, size: new(_SizeX, _SizeY), orientation: _Orientation, hasColor: _Color, displayNumber: _DisplayIdentifier);
-            
+            hexDrawable.ApplySettings(layerCount: _LayerCount, size: new(_SizeX, _SizeY), orientation: _Orientation, hasColor: _Color, displayNumber: _DisplayIdentifier, sortHexagons: _SortHexagon);
+
             individualGraphicsView.Invalidate();
             graphicsView.Invalidate();
 
@@ -167,6 +171,15 @@ namespace HexaMaui.App
                 _LayerMax = v;
                 layerSlide.Maximum = _LayerMax;
             }
+        }
+
+        private void sortHexagon_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            _SortHexagon = e.Value;
+            sortHexagonText.Text = _SortHexagon ? "Oui" : "Non";
+
+            hexDrawable.ApplySettings(layerCount: _LayerCount, size: new(_SizeX, _SizeY), orientation: _Orientation, hasColor: _Color, displayNumber: _DisplayIdentifier, sortHexagons: _SortHexagon);
+            graphicsView.Invalidate();
         }
     }
 

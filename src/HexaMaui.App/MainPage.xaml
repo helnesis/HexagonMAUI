@@ -77,6 +77,14 @@
                     </HorizontalStackLayout>
 
 
+                    <Label FontAttributes="Bold" Text="Trier les hexagones"/>
+
+                    <HorizontalStackLayout>
+                        <CheckBox CheckedChanged="sortHexagon_CheckedChanged" x:Name="sortHexagon" />
+                        <Label x:Name="sortHexagonText" Text="Oui" Margin="20"/>
+                    </HorizontalStackLayout>
+
+
                     <Label FontAttributes="Bold" Text="Hexagone sélectionné"/>
 
                     <HorizontalStackLayout>

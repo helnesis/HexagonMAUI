@@ -23,6 +23,8 @@ namespace HexaMaui.App.Manager
 
         private readonly bool _DisplayNumber;
 
+        private readonly bool _SortHexagons;
+
         #endregion
 
 
@@ -67,7 +69,7 @@ namespace HexaMaui.App.Manager
         /// <param name="orientation">Hexagon layout, set to true for pointy, false for flat.</param>
         /// <param name="color">Color</param>
         /// <exception cref="ArgumentException"></exception>
-        public LayoutManager(int layerCount, Point size, bool orientation, bool color = false, bool displayNumber = true)
+        public LayoutManager(int layerCount, Point size, bool orientation, bool color = false, bool displayNumber = true, bool sortHexagons = true)
         {
             if (layerCount < 1)
                 throw new ArgumentException("Layer count must be greater than 0");
@@ -77,6 +79,7 @@ namespace HexaMaui.App.Manager
             _Orientation = orientation;
             _HasColor = color;
             _DisplayNumber = displayNumber;
+            _SortHexagons = sortHexagons;
         }
 
         public void GenerateShape(ICanvas canvas, RectF dirtyRect)
@@ -90,7 +93,7 @@ namespace HexaMaui.App.Manager
             _Layout = 
                 new Layout(_Orientation ? Orientation.Pointy : Orientation.Flat, _Size, new(dirtyRect.Center.X, dirtyRect.Center.Y));
 
-            var shapeCoordinates = Shapes.Hexagons(_LayerCount, true);
+            var shapeCoordinates = Shapes.Hexagons(_LayerCount, _SortHexagons);
 
             var hexIndex = 0;
             var count = shapeCoordinates.Count;

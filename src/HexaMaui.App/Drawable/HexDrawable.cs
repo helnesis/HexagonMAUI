@@ -8,9 +8,9 @@ namespace HexaMaui.App.Drawable
 
         public LayoutManager? Layout { get { return _LayoutMgr; } }
 
-        public void ApplySettings(int layerCount, Hexagon.Lib.Point size, bool orientation = true, bool hasColor = true, bool displayNumber = true)
+        public void ApplySettings(int layerCount, Hexagon.Lib.Point size, bool orientation = true, bool hasColor = true, bool displayNumber = true, bool sortHexagons = true)
         {
-            _LayoutMgr = new(layerCount, size, orientation, hasColor, displayNumber);
+            _LayoutMgr = new(layerCount, size, orientation, hasColor, displayNumber, sortHexagons);
         }
 
         public void Draw(ICanvas canvas, RectF dirtyRect)
